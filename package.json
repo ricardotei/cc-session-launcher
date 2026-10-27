@@ -1,0 +1,125 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "cc-session-launcher",
+  "title": "Claude Code Sessions",
+  "description": "List Claude Code sessions active in the last few days and jump back into them in the Claude desktop app.",
+  "icon": "icon.png",
+  "author": "ricardoteixeira",
+  "categories": [
+    "Developer Tools",
+    "Productivity"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "recent-sessions",
+      "title": "Recent Claude Sessions",
+      "subtitle": "Claude Code",
+      "description": "Claude Code sessions with recent activity, grouped by repo. Jump back into the desktop app or resume in a terminal.",
+      "mode": "view"
+    },
+    {
+      "name": "menu-bar-sessions",
+      "title": "Claude Sessions in Menu Bar",
+      "subtitle": "Claude Code",
+      "description": "Recent Claude Code sessions in the menu bar. Click one to open it in the Claude desktop app, right-click to mark it completed, hold ⌥ to resume it in a terminal.",
+      "mode": "menu-bar",
+      "interval": "30s"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "defaultDays",
+      "title": "Default Window",
+      "description": "How far back to look for session activity when the command opens.",
+      "type": "dropdown",
+      "required": false,
+      "default": "3",
+      "data": [
+        {
+          "title": "1 day",
+          "value": "1"
+        },
+        {
+          "title": "3 days",
+          "value": "3"
+        },
+        {
+          "title": "7 days",
+          "value": "7"
+        },
+        {
+          "title": "30 days",
+          "value": "30"
+        },
+        {
+          "title": "All time",
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "name": "terminalApp",
+      "title": "Terminal App",
+      "description": "Terminal used by \"Resume in Terminal\".",
+      "type": "dropdown",
+      "required": false,
+      "default": "Terminal",
+      "data": [
+        {
+          "title": "Terminal",
+          "value": "Terminal"
+        },
+        {
+          "title": "Ghostty",
+          "value": "Ghostty"
+        },
+        {
+          "title": "iTerm",
+          "value": "iTerm"
+        }
+      ]
+    },
+    {
+      "name": "includeArchived",
+      "title": "Archived Sessions",
+      "label": "Show archived desktop sessions",
+      "description": "Include sessions archived in the Claude desktop app.",
+      "type": "checkbox",
+      "required": false,
+      "default": false
+    },
+    {
+      "name": "excludePaths",
+      "title": "Exclude Folders",
+      "description": "Comma-separated folder prefixes to hide (e.g. ~/Downloads, ~/scratch).",
+      "type": "textfield",
+      "required": false,
+      "default": ""
+    }
+  ],
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "lint": "ray lint",
+    "fix-lint": "ray lint --fix",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test test/*.test.ts",
+    "cli": "tsx src/cli.ts",
+    "build:cli": "esbuild src/cli.ts --bundle --platform=node --target=node22 --format=cjs --outfile=dist-cli/ccsl.cjs --banner:js=\"#!/usr/bin/env node\""
+  },
+  "dependencies": {
+    "@raycast/api": "^2.9.0",
+    "@raycast/utils": "^2.3.3"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.2.0",
+    "@types/node": "^22.19.17",
+    "@types/react": "^19.0.10",
+    "esbuild": "^0.28.2",
+    "eslint": "^9.39.5",
+    "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9"
+  }
+}

@@ -1,0 +1,18 @@
+#!/bin/sh
+# Thin wrapper around the bundled CLI (npm run build:cli). Works through symlinks, e.g. ln -s <repo>/bin/ccsl ~/.local/bin/ccsl
+src="$0"
+while [ -h "$src" ]; do
+  dir=$(cd -P "$(dirname "$src")" && pwd)
+  src=$(readlink "$src")
+  case "$src" in
+    /*) ;;
+    *) src="$dir/$src" ;;
+  esac
+done
+root=$(cd -P "$(dirname "$src")/.." && pwd)
+bundle="$root/dist-cli/ccsl.cjs"
+if [ ! -f "$bundle" ]; then
+  echo "ccsl: $bundle not found. Run 'npm run build:cli' in $root first." >&2
+  exit 1
+fi
+exec node "$bundle" "$@"
