@@ -2,6 +2,8 @@
 
 Jump back into your recent Claude Code sessions in one keystroke, from Raycast or the macOS menu bar.
 
+![Recent Claude Code sessions in Raycast and the macOS menu bar, grouped by repo with live status](docs/demo.gif)
+
 The Claude desktop app groups Code sessions by folder. With a few dozen repos, the sessions you're actually working on get buried. CC Session Launcher lists only the sessions with activity in the last few days, grouped by repo, shows which ones are running or waiting on you, and hands you straight back into the desktop app, so its harness stays in use.
 
 > **Unofficial.** Not affiliated with or endorsed by Anthropic. It reads files and uses `claude://` links that the Claude desktop app doesn't document, so an app update can break it. macOS only.
